@@ -11,5 +11,19 @@
 import styles from "../styles/SectionsView.module.css";
 
 export default function SectionsView({ sections, setCurrentSection }) {
-  return <div className={styles.sectionList}>Sections go here</div>;
+  return (
+    <div className={styles.sectionList}>
+      <ul>
+        {[...sections].sort().map((section) => (
+          <li
+            key={section}
+            onClick={() => setCurrentSection(section)}
+            data-testid={section}
+          >
+            {section}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

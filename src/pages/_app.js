@@ -1,14 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import "../styles/globals.css";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import Head from "next/head";
-
 import data from "../../data/seed.json";
 import styles from "../styles/Simplepedia.module.css";
 
+const router = useRouter();
+
 function MainApp({ Component, pageProps }) {
   const [collection, setCollection] = useState(data);
+  const {id} = router.query;
 
   const props = {
     ...pageProps,
