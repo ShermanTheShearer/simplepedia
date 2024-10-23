@@ -8,6 +8,7 @@
     setCurrentSection - a callback that expects a section as an argument
 
 */
+import PropTypes from "prop-types";
 import styles from "../styles/SectionsView.module.css";
 
 export default function SectionsView({ sections, setCurrentSection }) {
@@ -18,7 +19,7 @@ export default function SectionsView({ sections, setCurrentSection }) {
           <li
             key={section}
             onClick={() => setCurrentSection(section)}
-            data-testid={section}
+            data-testid="section"
           >
             {section}
           </li>
@@ -27,3 +28,8 @@ export default function SectionsView({ sections, setCurrentSection }) {
     </div>
   );
 }
+
+SectionsView.propTypes = {
+  sections: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setCurrentSection: PropTypes.func.isRequired,
+};

@@ -1,22 +1,35 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import "../styles/globals.css";
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import data from "../../data/seed.json";
 import styles from "../styles/Simplepedia.module.css";
 
-const router = useRouter();
-
-function MainApp({ Component, pageProps }) {
+export default function MainApp({ Component, pageProps }) {
   const [collection, setCollection] = useState(data);
-  const {id} = router.query;
+  const router = useRouter();
+  const { id } = router.query;
+
+  const currentArticle = id
+    ? collection.find((article) => +article.id === +id)
+    : undefined;
+
+  const setCurrentArticle = (article) => {
+    if (article) {
+      router.push(`/articles/${article.id}`);
+    } else {
+      router.push("/articles");
+    }
+  };
 
   const props = {
     ...pageProps,
     collection,
     setCollection,
+    currentArticle,
+    setCurrentArticle,
   };
 
   return (
@@ -34,8 +47,6 @@ function MainApp({ Component, pageProps }) {
     </div>
   );
 }
-
-export default MainApp;
 
 MainApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
