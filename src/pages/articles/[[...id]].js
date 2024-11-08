@@ -22,13 +22,15 @@ export default function Simplepedia({
 
   return (
     <>
+      <ButtonBar allowEdit={!!currentArticle} handleClick={handleClick} />
       <IndexBar
         collection={collection}
         setCurrentArticle={setCurrentArticle}
         currentArticle={currentArticle}
+        /* eslint-disable react/no-children-prop */
+        children={Article}
       />
       {currentArticle ? <Article currentArticle={currentArticle} /> : <p />}
-      <ButtonBar allowEdit={!!currentArticle} handleClick={handleClick} />
     </>
   );
 }

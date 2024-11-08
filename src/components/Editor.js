@@ -17,6 +17,8 @@
 */
 
 import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/system/Stack";
 import PropTypes from "prop-types";
 import styles from "../styles/Editor.module.css";
 import ArticleShape from "./ArticleShape";
@@ -31,44 +33,52 @@ export default function Editor({ currentArticle, complete }) {
 
   return (
     <div className={styles.editor}>
-      <input
-        type="text"
+      <TextField
+        required
+        fullWidth
+        margin="normal"
         id="title"
-        placeholder="Title must be set"
+        label="Title"
+        error={!title}
+        helperText={!title ? "Title can't be blank" : " "}
         value={title}
         onChange={(newTitle) => setTitle(newTitle.target.value)}
       />
 
-      <textarea
-        type="text"
-        id="content"
-        className={styles.textarea}
-        placeholder="Contents"
+      <TextField
+        fullWidth
+        multiline
+        rows={10}
+        margin="normal"
+        id="contents"
+        label="Contents"
         value={content}
         onChange={(newContent) => setContent(newContent.target.value)}
       />
 
-      <button
-        type="button"
-        id="save"
-        disabled={!title.trim()}
-        onClick={() => {
-          const now = new Date().toISOString();
-          const newArticle = {
-            ...currentArticle,
-            title,
-            contents: content,
-            edited: now,
-          };
-          complete(newArticle);
-        }}
-      >
-        Save
-      </button>
+      <Stack spacing={2} direction="row">
+        <button
+          type="button"
+          id="save"
+          disabled={!title.trim()}
+          onClick={() => {
+            const now = new Date().toISOString();
+            const newArticle = {
+              ...currentArticle,
+              title,
+              contents: content,
+              edited: now,
+            };
+            complete(newArticle);
+          }}
+        >
+          Save
+        </button>
 
-      <button type="button" id="cancel" onClick={() => complete()}>
-        Cancel
-      </button>
+        <button type="button" id="cancel" onClick={() => complete()}>
+          Cancel
+        </button>
+      </Stack>
     </div>
   );
 }

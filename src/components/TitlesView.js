@@ -8,13 +8,19 @@
     setCurrentArticle - a callback that expects an article as an argument
 
 */
+import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import ArticleShape from "./ArticleShape";
+
+const NoBulletList = styled("ul")(() => ({
+  listStyle: "none",
+  paddingLeft: 0,
+}));
 
 export default function TitlesView({ articles, setCurrentArticle }) {
   return (
     <div>
-      <ul>
+      <NoBulletList>
         {[...articles]
           .sort((a, b) => {
             if (a.title.toLowerCase() < b.title.toLowerCase()) {
@@ -34,7 +40,7 @@ export default function TitlesView({ articles, setCurrentArticle }) {
               {article.title}
             </li>
           ))}
-      </ul>
+      </NoBulletList>
     </div>
   );
 }

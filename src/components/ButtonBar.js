@@ -12,11 +12,12 @@
     allowEdit - a Boolean indicating if there is something that could be edited (required)
     handleClick - a function called when a button is clicked (required)
 */
+import ButtonGroup from "@mui/material/ButtonGroup";
 import PropTypes from "prop-types";
 
 export default function ButtonBar({ allowEdit, handleClick }) {
   return (
-    <div>
+    <ButtonGroup variant="contained" sx={{ my: 2 }}>
       <button id="add" type="button" onClick={() => handleClick("add")}>
         Add
       </button>
@@ -25,7 +26,7 @@ export default function ButtonBar({ allowEdit, handleClick }) {
           Edit
         </button>
       )}
-    </div>
+    </ButtonGroup>
   );
 }
 

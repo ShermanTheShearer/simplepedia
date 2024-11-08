@@ -10,6 +10,8 @@
     currentArticle - The article to render
 */
 import { useState, useEffect } from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import SectionsView from "./SectionsView";
 import TitlesView from "./TitlesView";
@@ -19,6 +21,7 @@ export default function IndexBar({
   collection,
   setCurrentArticle,
   currentArticle,
+  children,
 }) {
   const [currentSection, setCurrentSection] = useState(null);
 
@@ -49,17 +52,28 @@ export default function IndexBar({
     : [];
 
   return (
-    <div>
-      <SectionsView sections={sections} setCurrentSection={sectionSelection} />
-      {currentSection ? (
-        <TitlesView
-          articles={filteredArticles}
-          setCurrentArticle={setCurrentArticle}
-        />
-      ) : (
-        <p>Select a section</p>
-      )}
-    </div>
+    <Grid container spacing={2}>
+      <Grid item>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <SectionsView
+            sections={sections}
+            setCurrentSection={sectionSelection}
+            currentSection={currentSection}
+          />
+        </Box>
+      </Grid>
+      <Grid item>
+        {currentSection ? (
+          <TitlesView
+            articles={filteredArticles}
+            setCurrentArticle={setCurrentArticle}
+          />
+        ) : (
+          <p>Select a section</p>
+        )}
+      </Grid>
+      <Grid item>{children}</Grid>
+    </Grid>
   );
 }
 
@@ -67,4 +81,5 @@ IndexBar.propTypes = {
   collection: PropTypes.arrayOf(ArticleShape).isRequired,
   setCurrentArticle: PropTypes.func.isRequired,
   currentArticle: ArticleShape,
+  children: PropTypes.node,
 };

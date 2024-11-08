@@ -9,22 +9,33 @@
 
 */
 import PropTypes from "prop-types";
-import styles from "../styles/SectionsView.module.css";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-export default function SectionsView({ sections, setCurrentSection }) {
+export default function SectionsView({
+  sections,
+  setCurrentSection,
+  currentSection,
+}) {
+  const handleChange = (event, newSection) => {
+    setCurrentSection(newSection);
+  };
+
   return (
-    <div className={styles.sectionList}>
-      <ul>
+    <div>
+      <ToggleButtonGroup
+        color="primary"
+        exclusive
+        onChange={handleChange}
+        size="small"
+        value={currentSection}
+      >
         {[...sections].sort().map((section) => (
-          <li
-            key={section}
-            onClick={() => setCurrentSection(section)}
-            data-testid="section"
-          >
+          <ToggleButton key={section} data-testid="section" value={section}>
             {section}
-          </li>
+          </ToggleButton>
         ))}
-      </ul>
+      </ToggleButtonGroup>
     </div>
   );
 }
@@ -32,4 +43,5 @@ export default function SectionsView({ sections, setCurrentSection }) {
 SectionsView.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.string).isRequired,
   setCurrentSection: PropTypes.func.isRequired,
+  currentSection: PropTypes.string,
 };
