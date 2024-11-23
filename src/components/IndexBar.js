@@ -53,7 +53,7 @@ export default function IndexBar({
 
   return (
     <Grid container spacing={2}>
-      <Grid item>
+      <Grid item xs={12}>
         <Box display="flex" justifyContent="center" alignItems="center">
           <SectionsView
             sections={sections}
@@ -62,7 +62,8 @@ export default function IndexBar({
           />
         </Box>
       </Grid>
-      <Grid item>
+
+      <Grid item xs={12} sm={6} md={3}>
         {currentSection ? (
           <TitlesView
             articles={filteredArticles}
@@ -72,7 +73,9 @@ export default function IndexBar({
           <p>Select a section</p>
         )}
       </Grid>
-      <Grid item>{children}</Grid>
+      <Grid item xs={12} sm={6} md={9}>
+        {children}
+      </Grid>
     </Grid>
   );
 }

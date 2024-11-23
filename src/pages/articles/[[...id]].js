@@ -28,9 +28,15 @@ export default function Simplepedia({
         setCurrentArticle={setCurrentArticle}
         currentArticle={currentArticle}
         /* eslint-disable react/no-children-prop */
-        children={Article}
+        children={[
+          currentArticle ? (
+            <Article currentArticle={currentArticle} />
+          ) : (
+            <p>No article selected</p>
+          ),
+          ButtonBar,
+        ]}
       />
-      {currentArticle ? <Article currentArticle={currentArticle} /> : <p />}
     </>
   );
 }
