@@ -19,7 +19,12 @@ import PropTypes from "prop-types";
 export default function ButtonBar({ allowEdit, handleClick }) {
   return (
     <ButtonGroup variant="contained" sx={{ my: 2 }}>
-      <Button id="add" type="button" onClick={() => handleClick("add")}>
+      <Button
+        id="add"
+        variant="contained"
+        type="button"
+        onClick={() => handleClick("add")}
+      >
         Add
       </Button>
       {allowEdit && (

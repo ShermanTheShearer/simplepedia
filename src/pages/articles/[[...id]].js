@@ -32,7 +32,7 @@ export default function Simplepedia({
           currentArticle ? (
             <Article currentArticle={currentArticle} />
           ) : (
-            <p>No article selected</p>
+            <p>Select an article</p>
           ),
           ButtonBar,
         ]}

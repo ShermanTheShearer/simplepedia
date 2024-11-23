@@ -19,6 +19,7 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/system/Stack";
+import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 import styles from "../styles/Editor.module.css";
 import ArticleShape from "./ArticleShape";
@@ -57,8 +58,9 @@ export default function Editor({ currentArticle, complete }) {
       />
 
       <Stack spacing={2} direction="row">
-        <button
+        <Button
           type="button"
+          variant="contained"
           id="save"
           disabled={!title.trim()}
           onClick={() => {
@@ -73,11 +75,16 @@ export default function Editor({ currentArticle, complete }) {
           }}
         >
           Save
-        </button>
+        </Button>
 
-        <button type="button" id="cancel" onClick={() => complete()}>
+        <Button
+          type="button"
+          variant="contained"
+          id="cancel"
+          onClick={() => complete()}
+        >
           Cancel
-        </button>
+        </Button>
       </Stack>
     </div>
   );
